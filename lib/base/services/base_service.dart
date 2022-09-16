@@ -29,10 +29,12 @@ class BaseServiceManager {
       BaseRequestModel requestModel) async {
     String _url = ApiConstants.appBaseURL + requestModel.path;
     debugPrint(">>> url $_url");
-
+    Map<String, String> header = requestModel.header;
     late final Response httpResponse;
     if (BaseRequestModel.isLoggedIn) {
-      requestModel.header.addAll(BaseRequestModel.Additionalheader);
+      header.addAll(BaseRequestModel.Additionalheader);
+      debugPrint("headers added");
+      debugPrint("requestModel.header ${header}");
     }
     try {
       switch (requestModel.requestType) {
@@ -42,7 +44,7 @@ class BaseServiceManager {
                 _url,
                 queryParameters: requestModel.param,
                 options: Options(
-                  headers: requestModel.header,
+                  headers: header,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -57,7 +59,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: requestModel.header,
+                  headers: header,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -72,7 +74,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: requestModel.header,
+                  headers: header,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -87,7 +89,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: requestModel.header,
+                  headers: header,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -102,7 +104,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: requestModel.header,
+                  headers: header,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),

@@ -5,8 +5,6 @@ abstract class BaseRequestModel {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": "",
-        "": "",
-        "": ""
       };
 
   String get path;
@@ -15,7 +13,7 @@ abstract class BaseRequestModel {
 
   RequestType get requestType;
 
-  Map<String, String> get param => {};
+  Map<String, dynamic> get param => {};
 
   static Map<String, String> Additionalheader = {};
   static bool isLoggedIn = false;

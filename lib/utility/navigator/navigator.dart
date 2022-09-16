@@ -23,7 +23,7 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
       _instance.navigatorKey = GlobalKey<NavigatorState>();
       if (_pages.isEmpty) {
         _pages.add(_instance
-            ._createPage(const RouteSettings(name: NavigationPages.home)));
+            ._createPage(const RouteSettings(name: NavigationPages.kLogin)));
       }
     } catch (e) {
       log('Error: $e');
@@ -119,14 +119,6 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
     switch (routeSettings.name) {
       case NavigationPages.kLogin:
         child = LoginView();
-        break;
-
-      case NavigationPages.kComingSoonPage:
-        if (routeSettings.arguments is String) {
-          child = ComingSoonPage(pageTitle: routeSettings.arguments as String);
-        } else {
-          child = _errorRoute;
-        }
         break;
 
       case NavigationPages.home:

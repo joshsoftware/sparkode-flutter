@@ -8,6 +8,8 @@ import 'package:sparkode/utility/common_widgets/alert_bar.dart';
 import 'package:sparkode/utility/constants/assets.dart';
 import 'package:sparkode/utility/constants/colors.dart';
 import 'package:sparkode/utility/constants/constant.dart';
+import 'package:sparkode/utility/navigator/navigation_pages.dart';
+import 'package:sparkode/utility/navigator/navigator.dart';
 import 'package:sparkode/views/common_views/login_text_field.dart';
 
 class LoginView extends StatefulWidget {
@@ -96,9 +98,12 @@ class _LoginViewState extends State<LoginView> {
                                 final responseModel =
                                     LoginResponseModel.fromJson(
                                         response.data as Map<String, dynamic>);
+
                                 debugPrint(responseModel.data.authToken);
                                 debugPrint(BaseRequestModel.Additionalheader
                                     .toString());
+                                AppNavigator.instance
+                                    .navigateTo(name: NavigationPages.home);
                               } else {
                                 final errorMap =
                                     response.data as Map<String, dynamic>;
