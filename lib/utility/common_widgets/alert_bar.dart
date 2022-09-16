@@ -16,7 +16,7 @@ class AlertBar {
     Flushbar(
       title: title,
       message: description,
-      duration: Duration(seconds: durationInMilliseconds!),
+      duration: Duration(milliseconds: durationInMilliseconds!),
       flushbarPosition: (position == AlertBarPosition.TOP)
           ? FlushbarPosition.TOP
           : FlushbarPosition.BOTTOM,

@@ -1,5 +1,6 @@
 class Assets {
   // Common
-  static const String backArrow = 'assets/icons/arrow_back_black.svg';
-  static const String searchIconBlack = 'assets/icons/search_icon_black.svg';
+  static const String logo = "assets/logo.png";
+  static const String loginBg = "assets/login_bg.png";
+  static const String loginBgExtended = "assets/login_bg_extended.png";
 }

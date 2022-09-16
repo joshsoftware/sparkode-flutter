@@ -16,7 +16,9 @@ class LoginServices {
       }
     } else {
       return ResponseModel(
-          errorMessage: "error: ${response.errorMessage}", isSuccess: false);
+          errorMessage: "error: ${response.errorMessage}",
+          isSuccess: false,
+          data: response.data);
     }
   }
 }
