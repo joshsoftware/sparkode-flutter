@@ -23,7 +23,7 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
       _instance.navigatorKey = GlobalKey<NavigatorState>();
       if (_pages.isEmpty) {
         _pages.add(_instance
-            ._createPage(const RouteSettings(name: NavigationPages.kLogin)));
+            ._createPage(const RouteSettings(name: NavigationPages.home)));
       }
     } catch (e) {
       log('Error: $e');

@@ -1,12 +1,13 @@
 import 'package:sparkode/base/services/base_service.dart';
-import 'package:sparkode/models/login_model/login_request_model.dart';
+import 'package:sparkode/models/drive_model/drive_request_model.dart';
 import 'package:sparkode/utility/helpers/APIHelper/api_response_model.dart';
 
-class LoginServices {
-  Future<ResponseModel> loginUser(String email, String password) async {
+class HomeServices{
+  Future<ResponseModel> getDrives(String drivePath) async{
     final ServiceResponseModel response = await BaseServiceManager
         .sharedInstance
-        .sendRequest(LoginRequestModel(email: email, password: password));
+        .sendRequest(DriveRequestModel(limit: "0", offset: "15",drivePath: drivePath));
+
     if (response.isSuccess) {
       try {
         return ResponseModel(data: response.data);

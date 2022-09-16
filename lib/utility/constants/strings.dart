@@ -22,6 +22,10 @@ class Strings {
   static const upcomingDrive = "Upcoming";
   static const String ongoingDrive = "Ongoing";
   static const completedDrive = "Completed";
-
+  static const appeared = "Apprd";
+  static const invitation = "Inv";
+  static const submission = "Sub";
+  static const candidates = "Candidates";
+  static const result = "Result";
 
 }
