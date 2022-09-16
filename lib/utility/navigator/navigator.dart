@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:sparkode/modules/login/login_view.dart';
 import 'package:sparkode/views/pages/coming_soon.dart';
 
 import '../../views/pages/dashboard_page.dart';
@@ -20,8 +21,8 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
     try {
       _instance.navigatorKey = GlobalKey<NavigatorState>();
       if (_pages.isEmpty) {
-        _pages.add(_instance._createPage(
-            const RouteSettings(name: NavigationPages.kDashboard)));
+        _pages.add(_instance
+            ._createPage(const RouteSettings(name: NavigationPages.kLogin)));
       }
     } catch (e) {
       log('Error: $e');
@@ -115,8 +116,8 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
     late final Widget child;
 
     switch (routeSettings.name) {
-      case NavigationPages.kDashboard:
-        child = DashboardPage();
+      case NavigationPages.kLogin:
+        child = LoginView();
         break;
 
       case NavigationPages.kComingSoonPage:

@@ -111,7 +111,8 @@ class BaseServiceManager {
       return ServiceResponseModel(
           statusCode: NO_INTERNET, errorMessage: 'No Internet Connection');
     }
-
+    debugPrint(">>> status Code ${httpResponse.statusCode}");
+    debugPrint(">>> httpResponse $httpResponse");
     return _handleResponse(httpResponse);
   }
 
@@ -126,12 +127,19 @@ class BaseServiceManager {
 
       case 400:
         return ServiceResponseModel(
-            statusCode: response.statusCode!, errorMessage: "Invalid Request:");
+            statusCode: response.statusCode!,
+            errorMessage: "Invalid Request:",
+            data: response.data);
       case 401:
-
+        return ServiceResponseModel(
+            statusCode: response.statusCode!,
+            errorMessage: 'Invalid Credentials: ',
+            data: response.data);
       case 403:
         return ServiceResponseModel(
-            statusCode: response.statusCode!, errorMessage: 'Unauthorised: ');
+            statusCode: response.statusCode!,
+            errorMessage: 'Unauthorised: ',
+            data: response.data);
       case 500:
 
       default:

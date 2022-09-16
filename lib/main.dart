@@ -14,17 +14,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => DashboardViewModel()),
-      ],
-      child: MaterialApp(
-        title: 'Flutter + MVVM + Provider',
-        home: Router(
-          routerDelegate: AppNavigator.instance,
-          backButtonDispatcher: RootBackButtonDispatcher(),
-        ),
+    return MaterialApp(
+      title: "Sparkode",
+      home: Router(
+        routerDelegate: AppNavigator.instance,
+        backButtonDispatcher: RootBackButtonDispatcher(),
       ),
     );
+    // return MultiProvider(
+    //   providers: [
+    //     // ChangeNotifierProvider(create: (_) => DashboardViewModel()),
+    //   ],
+    //   child: MaterialApp(
+    //     title: 'Flutter + MVVM + Provider',
+    //     home: Router(
+    //       routerDelegate: AppNavigator.instance,
+    //       backButtonDispatcher: RootBackButtonDispatcher(),
+    //     ),
+    //   ),
+    // );
   }
 }

@@ -45,8 +45,5 @@ class Login {
 
 class SharedPrefConstant {
   const SharedPrefConstant();
-
-  String get kUserModel => "kUserModel";
   String get kAuthToken => "kAuthToken";
-  String get kLanguagePrefrence => "kLanguagePrefrence";
 }
