@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:sparkode/modules/home/home.dart';
 import 'package:sparkode/modules/login/login_view.dart';
 import 'package:sparkode/views/pages/coming_soon.dart';
 
@@ -126,6 +127,10 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
         } else {
           child = _errorRoute;
         }
+        break;
+
+      case NavigationPages.home:
+        child = Home();
         break;
 
       default:
