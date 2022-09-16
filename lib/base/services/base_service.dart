@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:sparkode/base/Model/base_request_model.dart';
+import 'package:sparkode/models/login_model/login_request_model.dart';
 import 'package:sparkode/utility/constants/api_constants.dart';
 
 import '../../utility/helpers/APIHelper/api_response_model.dart';
@@ -30,7 +31,9 @@ class BaseServiceManager {
     debugPrint(">>> url $_url");
 
     late final Response httpResponse;
-
+    if (BaseRequestModel.isLoggedIn) {
+      requestModel.header.addAll(BaseRequestModel.Additionalheader);
+    }
     try {
       switch (requestModel.requestType) {
         case RequestType.get:
@@ -113,6 +116,9 @@ class BaseServiceManager {
     }
     debugPrint(">>> status Code ${httpResponse.statusCode}");
     debugPrint(">>> httpResponse $httpResponse");
+    if (requestModel is LoginRequestModel && httpResponse.statusCode == 200) {
+      _saveHeaders(httpResponse);
+    }
     return _handleResponse(httpResponse);
   }
 
@@ -149,6 +155,17 @@ class BaseServiceManager {
                 'Error During Communication: Error occured while Communication with Server with StatusCode : ${response.statusCode}');
     }
   }
+}
+
+_saveHeaders(Response httpResponse) {
+  BaseRequestModel.isLoggedIn = true;
+  BaseRequestModel.Additionalheader = {
+    "access-token": httpResponse.headers.value("access-token") ?? "",
+    "token-type": httpResponse.headers.value("token-type") ?? "",
+    "client": httpResponse.headers.value("client") ?? "",
+    "expiry": httpResponse.headers.value("expiry") ?? "",
+    "uid": httpResponse.headers.value("uid") ?? "",
+  };
 }
 
 // Success

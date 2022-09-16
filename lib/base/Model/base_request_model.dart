@@ -4,8 +4,9 @@ abstract class BaseRequestModel {
   Map<String, String> get header => {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization":
-            "", //Todo set authorizastion / bearer token after login
+        "Authorization": "",
+        "": "",
+        "": ""
       };
 
   String get path;
@@ -15,4 +16,7 @@ abstract class BaseRequestModel {
   RequestType get requestType;
 
   Map<String, String> get param => {};
+
+  static Map<String, String> Additionalheader = {};
+  static bool isLoggedIn = false;
 }

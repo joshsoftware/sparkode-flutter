@@ -5,7 +5,6 @@ class AppColors {
   static const Color secondary = Color(0xFFC9944C);
   static const Color textColorPrimary = Color(0xFF000000);
 
-
   static const Color gray13 = Color(0xFF202020);
   static const Color gray24 = Color(0xFF2C2F3D);
   static const Color ebonyClay = Color(0xFF252836);
@@ -25,7 +24,6 @@ class AppColors {
   static const Color yellow = Colors.yellow;
   static const Color orange = Colors.orange;
   static const Color red = Colors.red;
+  static const Color white = Colors.white;
   static const lightGreen = Color(0xFF05ea05);
-
-
 }
