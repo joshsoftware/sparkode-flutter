@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sparkode/base/Model/base_request_model.dart';
 import 'package:sparkode/models/login_model/login_response_model.dart';
 import 'package:sparkode/services/login_services.dart';
 import 'package:sparkode/utility/common_widgets/alert_bar.dart';
 import 'package:sparkode/utility/constants/assets.dart';
 import 'package:sparkode/utility/constants/colors.dart';
-import 'package:sparkode/utility/constants/constant.dart';
+import 'package:sparkode/utility/helpers/shared_pref_helper/shared_pred_helper.dart';
 import 'package:sparkode/utility/navigator/navigation_pages.dart';
 import 'package:sparkode/utility/navigator/navigator.dart';
 import 'package:sparkode/views/common_views/login_text_field.dart';
@@ -22,6 +20,13 @@ class _LoginViewState extends State<LoginView> {
   final LoginServices loginServices = LoginServices();
   String email = "";
   String password = "";
+
+  @override
+  void initState() {
+    super.initState();
+    Preference.load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +103,7 @@ class _LoginViewState extends State<LoginView> {
                                 final responseModel =
                                     LoginResponseModel.fromJson(
                                         response.data as Map<String, dynamic>);
-
+                                Preference.setUser("user", responseModel);
                                 debugPrint(responseModel.data.authToken);
                                 debugPrint(BaseRequestModel.Additionalheader
                                     .toString());

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sparkode/models/login_model/login_response_model.dart';
 
 class Preference {
   static late final SharedPreferences _prefs;
@@ -38,4 +41,23 @@ class Preference {
       _memoryPrefs[key] ?? _prefs.getDouble(key);
 
   static bool? getBool(String key) => _memoryPrefs[key] ?? _prefs.getBool(key);
+
+  static void setUser(String key,LoginResponseModel value){
+    String json = jsonEncode(value);
+    _prefs.setString(key, json);
+  }
+
+  static LoginResponseModel? getUser(String key){
+    Map<String,dynamic>? json;
+    if(_prefs.getString(key)!=null) {
+      json = jsonDecode(_prefs.getString(key)!);
+    } else {
+      json = null;
+    }
+    if(json == null) {
+      return null;
+    }
+    var user = LoginResponseModel.fromJson(json);
+    return user;
+  }
 }
