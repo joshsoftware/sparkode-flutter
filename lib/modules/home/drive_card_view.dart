@@ -28,14 +28,18 @@ class DriveCardView extends StatelessWidget {
                     width: 40,
                     child: Column(
                       children: [
-                        Text("${driveResponseModel.appeared}",style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.white, fontSize: 18),),
-                        Text(Strings.appeared,style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.white, fontSize: 18))
+                        Text("${driveResponseModel.invitationSent}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                ?.copyWith(
+                                    color: AppColors.white, fontSize: 18)),
+                        Text(Strings.invitation,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                ?.copyWith(
+                                    color: AppColors.white, fontSize: 18))
                       ],
                     ),
                   ),
@@ -43,26 +47,19 @@ class DriveCardView extends StatelessWidget {
                     width: 40,
                     child: Column(
                       children: [
-                        Text("${driveResponseModel.invitationSent}",style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.white, fontSize: 18)),
-                        Text(Strings.invitation,style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.white, fontSize: 18))
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 40,
-                    child: Column(
-                      children: [
-                        Text("${driveResponseModel.totalSubmissions}",style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            ?.copyWith(color: AppColors.white, fontSize: 18),),
-                        Text(Strings.submission,style: Theme.of(context).textTheme.headline6?.copyWith(color: AppColors.white, fontSize: 18))
+                        Text(
+                          "${driveResponseModel.totalSubmissions}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(color: AppColors.white, fontSize: 18),
+                        ),
+                        Text(Strings.submission,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                ?.copyWith(
+                                    color: AppColors.white, fontSize: 18))
                       ],
                     ),
                   )
@@ -72,7 +69,12 @@ class DriveCardView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   // IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.delete,color: AppColors.babyBlue,))
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.delete,
+                        color: AppColors.babyBlue,
+                      ))
                 ],
               )
             ],
@@ -83,9 +85,9 @@ class DriveCardView extends StatelessWidget {
           Text(
             "${driveResponseModel.name}",
             style: Theme.of(context)
-              .textTheme
-              .headline6
-              ?.copyWith(color: AppColors.blueHaze, fontSize: 22),
+                .textTheme
+                .headline6
+                ?.copyWith(color: AppColors.blueHaze, fontSize: 22),
           ),
           const SizedBox(
             height: 10,
@@ -94,14 +96,16 @@ class DriveCardView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${driveResponseModel.startTime}",style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  ?.copyWith(color: AppColors.white, fontSize: 12)),
-              Text("${driveResponseModel.endTime}",style: Theme.of(context)
-                  .textTheme
-                  .subtitle1
-                  ?.copyWith(color: AppColors.white, fontSize: 12))
+              Text("${driveResponseModel.startTime}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(color: AppColors.white, fontSize: 12)),
+              Text("${driveResponseModel.endTime}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      ?.copyWith(color: AppColors.white, fontSize: 12))
             ],
           ),
           Row(
@@ -133,3 +137,37 @@ class DriveCardView extends StatelessWidget {
   }
 }
 
+class CardForCount extends StatelessWidget {
+  const CardForCount({super.key, required this.title, required this.count});
+
+  final String title;
+  final String count;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 50,
+      child: Container(
+        padding: EdgeInsets.all(4.0),
+        decoration: BoxDecoration(
+            border: Border.all(color: AppColors.cornFlowerBlue),
+            borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          children: [
+            Text(
+              count,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  ?.copyWith(color: AppColors.white, fontSize: 18),
+            ),
+            Text(title,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.copyWith(color: AppColors.white, fontSize: 18))
+          ],
+        ),
+      ),
+    );
+  }
+}

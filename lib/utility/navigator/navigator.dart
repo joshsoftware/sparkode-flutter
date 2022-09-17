@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:sparkode/modules/WebView/ResultWebView.dart';
 import 'package:sparkode/modules/home/home.dart';
 import 'package:sparkode/modules/login/login_view.dart';
 import 'package:sparkode/views/pages/coming_soon.dart';
@@ -130,6 +131,10 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
         child = ResultList(
           id: routeSettings.arguments as int,
         );
+        break;
+
+      case NavigationPages.resultReport:
+        child = ResultWebView();
         break;
 
       default:
