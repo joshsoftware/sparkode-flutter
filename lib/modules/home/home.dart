@@ -22,10 +22,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var homeServices = HomeServices();
 
-   late ValueNotifier<List<Drive>> list;
-   late List<Drive> ongoingDrive;
-   late List<Drive> completedDrive;
-   late List<Drive> upcomingDrive;
+  late ValueNotifier<List<Drive>> list;
+  late List<Drive> ongoingDrive;
+  late List<Drive> completedDrive;
+  late List<Drive> upcomingDrive;
 
   bool isLoading = true;
 
@@ -42,9 +42,21 @@ class _HomeState extends State<Home> {
         builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
           if (asyncSnapshot.connectionState == ConnectionState.done &&
               asyncSnapshot.hasData) {
-            ongoingDrive = DriveResponseModel.fromJson((asyncSnapshot.data[0] as ResponseModel).data as Map<String, dynamic>).data.drives;
-            upcomingDrive = DriveResponseModel.fromJson((asyncSnapshot.data[1] as ResponseModel).data as Map<String, dynamic>).data.drives;
-            completedDrive = DriveResponseModel.fromJson((asyncSnapshot.data[2] as ResponseModel).data as Map<String, dynamic>).data.drives;
+            ongoingDrive = DriveResponseModel.fromJson(
+                    (asyncSnapshot.data[0] as ResponseModel).data
+                        as Map<String, dynamic>)
+                .data
+                .drives;
+            upcomingDrive = DriveResponseModel.fromJson(
+                    (asyncSnapshot.data[1] as ResponseModel).data
+                        as Map<String, dynamic>)
+                .data
+                .drives;
+            completedDrive = DriveResponseModel.fromJson(
+                    (asyncSnapshot.data[2] as ResponseModel).data
+                        as Map<String, dynamic>)
+                .data
+                .drives;
             if (isLoading) {
               list = ValueNotifier(ongoingDrive);
               isLoading = false;
@@ -58,21 +70,24 @@ class _HomeState extends State<Home> {
                     DefaultTabController.of(context)!;
                 tabController.addListener(() {
                   if (!tabController.indexIsChanging) {
-                    switch(tabController.index){
-                      case 0 :
+                    switch (tabController.index) {
+                      case 0:
                         list.value = ongoingDrive;
                         debugPrint("TabController Index");
-                        debugPrint("TabController Index ${ongoingDrive.length}");
+                        debugPrint(
+                            "TabController Index ${ongoingDrive.length}");
                         break;
                       case 1:
                         list.value = upcomingDrive;
                         debugPrint("TabController Index");
-                        debugPrint("TabController Index ${upcomingDrive.length}");
+                        debugPrint(
+                            "TabController Index ${upcomingDrive.length}");
                         break;
                       case 2:
                         list.value = completedDrive;
                         debugPrint("TabController Index");
-                        debugPrint("TabController Index ${completedDrive.length}");
+                        debugPrint(
+                            "TabController Index ${completedDrive.length}");
                         break;
                     }
                   }
@@ -80,12 +95,22 @@ class _HomeState extends State<Home> {
                 return Scaffold(
                     backgroundColor: AppColors.blackRock,
                     appBar: AppBar(
+                      title: Text(
+                        "Drives",
+                        style: Theme.of(context).textTheme.headline3?.copyWith(
+                            color: AppColors.babyBlue,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 24),
+                      ),
                       automaticallyImplyLeading: false,
                       backgroundColor: AppColors.blackRock,
                       bottom: const TabBar(
                         tabs: tabs,
                       ),
-                      actions: [],
+                      actions: [
+                        IconButton(
+                            onPressed: () {}, icon: Icon(Icons.exit_to_app))
+                      ],
                     ),
                     body: // LoaderWidget.hideLoader(context);
                         TabBarView(
@@ -94,13 +119,13 @@ class _HomeState extends State<Home> {
                           animation: list,
                           builder: (BuildContext context, Widget? child) {
                             return ListView.builder(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              itemCount: list.value.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return DriveCardView(list.value[index]);
-                              });  },
-
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                itemCount: list.value.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DriveCardView(list.value[index]);
+                                });
+                          },
                         );
                       }).toList(),
                     ));

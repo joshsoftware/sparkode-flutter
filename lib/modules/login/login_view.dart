@@ -107,8 +107,8 @@ class _LoginViewState extends State<LoginView> {
                                 debugPrint(responseModel.data.authToken);
                                 debugPrint(BaseRequestModel.Additionalheader
                                     .toString());
-                                AppNavigator.instance.navigateTo(
-                                    name: NavigationPages.resultList);
+                                AppNavigator.instance
+                                    .navigateTo(name: NavigationPages.home);
                               } else {
                                 final errorMap =
                                     response.data as Map<String, dynamic>;
@@ -136,7 +136,10 @@ class _LoginViewState extends State<LoginView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                AppNavigator.instance.navigateTo(
+                                    name: NavigationPages.resultList);
+                              },
                               child: Text(
                                 "Forgot password",
                                 style: Theme.of(context)
