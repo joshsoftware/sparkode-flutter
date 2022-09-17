@@ -111,13 +111,19 @@ class _CandidateListState extends State<CandidateList> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    resultResponse?.data.candidates[index].email ?? "",
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2
-                        ?.copyWith(color: Colors.white60),
+                  Row(
+                    children: [
+                      const Icon(Icons.mail_outline,color: AppColors.sunglow,),
+                      SizedBox(width: 4,),
+                      Text(
+                        resultResponse?.data.candidates[index].email ?? "",
+                        textAlign: TextAlign.start,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            ?.copyWith(color: Colors.white60),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 5,
@@ -134,12 +140,17 @@ class _CandidateListState extends State<CandidateList> {
               // )
             ],
           ),
-          Column(
+          SizedBox(height: 4,),
+          Row(
             children: [
+              Icon(Icons.local_phone,color: AppColors.sunglow,),
+              SizedBox(width: 4,),
               Text(
-                (resultResponse?.data.candidates[index].mobileNumber ?? 0).toString(),
-                style: Theme.of(context).textTheme.headline3?.copyWith(
-                    fontWeight: FontWeight.w800, color: AppColors.babyBlue),
+                (resultResponse?.data.candidates[index].mobileNumber).toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    ?.copyWith(color: Colors.white60),
               ),
             ],
           ),

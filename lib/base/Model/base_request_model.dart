@@ -14,7 +14,4 @@ abstract class BaseRequestModel {
   RequestType get requestType;
 
   Map<String, dynamic> get param => {};
-
-  static Map<String, String> Additionalheader = {};
-  static bool isLoggedIn = false;
 }

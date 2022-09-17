@@ -104,9 +104,6 @@ class _LoginViewState extends State<LoginView> {
                                     LoginResponseModel.fromJson(
                                         response.data as Map<String, dynamic>);
                                 Preference.setUser("user", responseModel);
-                                debugPrint(responseModel.data.authToken);
-                                debugPrint(BaseRequestModel.Additionalheader
-                                    .toString());
                                 AppNavigator.instance
                                     .navigateTo(name: NavigationPages.home);
                               } else {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sparkode/base/Model/base_request_model.dart';
 import 'package:sparkode/models/login_model/login_request_model.dart';
 import 'package:sparkode/utility/constants/api_constants.dart';
+import 'package:sparkode/utility/helpers/shared_pref_helper/shared_pred_helper.dart';
 
 import '../../utility/helpers/APIHelper/api_response_model.dart';
 
@@ -31,10 +32,10 @@ class BaseServiceManager {
     debugPrint(">>> url $_url");
     Map<String, String> header = requestModel.header;
     late final Response httpResponse;
-    if (BaseRequestModel.isLoggedIn) {
-      header.addAll(BaseRequestModel.Additionalheader);
-      debugPrint("headers added");
-      debugPrint("requestModel.header ${header}");
+    var allHeaders = requestModel.header;
+    var headers = Preference.getHeaders("headers");
+    if (headers!=null) {
+      allHeaders.addAll(header);
     }
     try {
       switch (requestModel.requestType) {
@@ -44,7 +45,7 @@ class BaseServiceManager {
                 _url,
                 queryParameters: requestModel.param,
                 options: Options(
-                  headers: header,
+                  headers: allHeaders,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -59,7 +60,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: header,
+                  headers: allHeaders,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -74,7 +75,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: header,
+                  headers: allHeaders,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -89,7 +90,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: header,
+                  headers: allHeaders,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -104,7 +105,7 @@ class BaseServiceManager {
                 queryParameters: requestModel.param,
                 data: requestModel.body,
                 options: Options(
-                  headers: header,
+                  headers: allHeaders,
                   receiveDataWhenStatusError: _receiveDataWhenStatusError,
                   validateStatus: _validateStatus,
                 ),
@@ -160,14 +161,14 @@ class BaseServiceManager {
 }
 
 _saveHeaders(Response httpResponse) {
-  BaseRequestModel.isLoggedIn = true;
-  BaseRequestModel.Additionalheader = {
+  final headers =  {
     "access-token": httpResponse.headers.value("access-token") ?? "",
     "token-type": httpResponse.headers.value("token-type") ?? "",
     "client": httpResponse.headers.value("client") ?? "",
     "expiry": httpResponse.headers.value("expiry") ?? "",
     "uid": httpResponse.headers.value("uid") ?? "",
   };
+  Preference.setHeaders("headers", headers);
 }
 
 // Success

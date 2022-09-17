@@ -48,16 +48,33 @@ class Preference {
   }
 
   static LoginResponseModel? getUser(String key){
-    Map<String,dynamic>? json;
+    Map<String,dynamic> json;
     if(_prefs.getString(key)!=null) {
       json = jsonDecode(_prefs.getString(key)!);
     } else {
-      json = null;
-    }
-    if(json == null) {
       return null;
     }
+
     var user = LoginResponseModel.fromJson(json);
     return user;
   }
+
+  static void setHeaders(String key,Map<String,String> value){
+    String json = jsonEncode(value);
+    _prefs.setString(key,json);
+  }
+
+  static Map<String,String>? getHeaders(String key){
+    Map<String,String> json;
+    if(_prefs.getString(key)!=null){
+      json = jsonDecode(_prefs.getString(key)!);
+    }
+    else{
+      return null;
+    }
+
+    return json;
+  }
+
+
 }
