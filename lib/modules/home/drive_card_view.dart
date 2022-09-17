@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sparkode/models/drive_model/drive_response_model.dart';
 import 'package:sparkode/utility/constants/colors.dart';
 import 'package:sparkode/utility/constants/strings.dart';
+import 'package:sparkode/utility/helpers/date_time_helper/date_time_formatter.dart';
 
 class DriveCardView extends StatelessWidget {
   const DriveCardView(this.driveResponseModel);
   final Drive driveResponseModel;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -96,12 +98,16 @@ class DriveCardView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${driveResponseModel.startTime}",
+              Text(
+                  DateTimeFormatter.getDisplayDate(
+                      driveResponseModel.startTime ?? ""),
                   style: Theme.of(context)
                       .textTheme
                       .headline6
                       ?.copyWith(color: AppColors.white, fontSize: 12)),
-              Text("${driveResponseModel.endTime}",
+              Text(
+                  DateTimeFormatter.getDisplayDate(
+                      driveResponseModel.endTime ?? ""),
                   style: Theme.of(context)
                       .textTheme
                       .subtitle1

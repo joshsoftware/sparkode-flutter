@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sparkode/models/login_model/forgot_password_response_model.dart';
-import 'package:sparkode/models/login_model/login_response_model.dart';
 import 'package:sparkode/utility/navigator/navigator.dart';
 import '../../services/login_services.dart';
 import '../../utility/common_widgets/alert_bar.dart';
