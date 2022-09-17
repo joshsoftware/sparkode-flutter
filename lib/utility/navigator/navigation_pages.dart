@@ -6,4 +6,6 @@ class NavigationPages {
   static const String resultList = '/ResultList';
   static const String resultReport = '/ResultReport';
   static const String forgotPassword = '/ForgotPassword';
+  static const String candidateList = '/CandidateList';
+  static const String splash = '/splash';
 }

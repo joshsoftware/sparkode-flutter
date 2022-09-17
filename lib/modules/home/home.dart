@@ -119,9 +119,9 @@ class _HomeState extends State<Home> {
                                 itemBuilder: (BuildContext context, int index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      AppNavigator.instance.navigateTo(
-                                          name: NavigationPages.resultList,
-                                          arguments: list.value[index].id);
+                                      // AppNavigator.instance.navigateTo(
+                                      //     name: NavigationPages.resultList,
+                                      //     arguments: list.value[index].id);
                                     },
                                     child: DriveCardView(
                                       list.value[index],

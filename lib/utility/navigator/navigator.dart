@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:sparkode/modules/WebView/ResultWebView.dart';
+import 'package:sparkode/modules/candidates/CandidateList.dart';
 import 'package:sparkode/modules/home/home.dart';
 import 'package:sparkode/modules/login/forgot_password.dart';
 import 'package:sparkode/modules/login/login_view.dart';
+import 'package:sparkode/modules/login/splash_screen.dart';
 import 'package:sparkode/views/pages/coming_soon.dart';
 import 'package:sparkode/modules/Result%20list/result_list.dart';
 
@@ -26,7 +28,7 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
       _instance.navigatorKey = GlobalKey<NavigatorState>();
       if (_pages.isEmpty) {
         _pages.add(_instance
-            ._createPage(const RouteSettings(name: NavigationPages.kLogin)));
+            ._createPage(const RouteSettings(name: NavigationPages.splash)));
       }
     } catch (e) {
       log('Error: $e');
@@ -128,6 +130,16 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
         child = Home();
         break;
 
+      case NavigationPages.forgotPassword:
+        child = ForgotPassword();
+        break;
+
+      case NavigationPages.candidateList:
+        child = CandidateList(
+          id:routeSettings.arguments as int,
+        );
+        break;
+
       case NavigationPages.resultList:
         child = ResultList(
           id: routeSettings.arguments as int,
@@ -140,6 +152,10 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
 
       case NavigationPages.forgotPassword:
         child = ForgotPassword();
+        break;
+
+      case NavigationPages.splash:
+        child = SplashScreen();
         break;
 
       default:
