@@ -145,10 +145,10 @@ class CardForCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 60,
+      // width: 60,
       child: Container(
-        margin: EdgeInsets.all(2.0),
-        padding: EdgeInsets.all(4.0),
+        margin: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
         decoration: BoxDecoration(
             border: Border.all(color: AppColors.cornFlowerBlue, width: 2),
             borderRadius: BorderRadius.circular(12)),

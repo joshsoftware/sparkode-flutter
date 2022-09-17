@@ -76,21 +76,12 @@ class _HomeState extends State<Home> {
                     switch (tabController.index) {
                       case 0:
                         list.value = ongoingDrive;
-                        debugPrint("TabController Index");
-                        debugPrint(
-                            "TabController Index ${ongoingDrive.length}");
                         break;
                       case 1:
                         list.value = upcomingDrive;
-                        debugPrint("TabController Index");
-                        debugPrint(
-                            "TabController Index ${upcomingDrive.length}");
                         break;
                       case 2:
                         list.value = completedDrive;
-                        debugPrint("TabController Index");
-                        debugPrint(
-                            "TabController Index ${completedDrive.length}");
                         break;
                     }
                   }
@@ -116,6 +107,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                     body: TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
                       children: tabs.map((Tab tab) {
                         return AnimatedBuilder(
                           animation: list,
@@ -144,6 +136,7 @@ class _HomeState extends State<Home> {
             );
           }
           return Scaffold(
+              backgroundColor: AppColors.easyBay,
               body: Container(
                   child: const Center(child: CircularProgressIndicator())));
         });

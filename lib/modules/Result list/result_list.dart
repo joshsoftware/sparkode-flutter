@@ -18,8 +18,9 @@ class ResultList extends StatefulWidget {
 class _ResultListState extends State<ResultList> {
   final resultListService = ResultListService();
   ResultListResponseModel? resultResponse;
-  int currentPage = 0;
+  int currentPage = 1;
   int totalPage = 1;
+  String pageStatus = "1 / 1";
   @override
   void initState() {
     super.initState();
@@ -28,12 +29,31 @@ class _ResultListState extends State<ResultList> {
 
   fetchResultList() async {
     final response = await resultListService.getResultListForId(
-        id: widget.id.toString(), page: 1);
+        id: widget.id.toString(), page: currentPage);
     if (response.isSuccess) {
       setState(() {
         resultResponse = ResultListResponseModel.fromJson(
             response.data as Map<String, dynamic>);
+        currentPage = resultResponse?.data.page ?? 1;
+        totalPage = resultResponse?.data.pages ?? 1;
+        pageStatus = "$currentPage / $totalPage";
       });
+    }
+  }
+
+  fetchResultForNextPage() {
+    if (currentPage < totalPage) {
+      currentPage += 1;
+      resultResponse = null;
+      fetchResultList();
+    }
+  }
+
+  fetchResultForPrevPage() {
+    if (currentPage > 1) {
+      currentPage -= 1;
+      resultResponse = null;
+      fetchResultList();
     }
   }
 
@@ -44,6 +64,28 @@ class _ResultListState extends State<ResultList> {
       appBar: AppBar(
         title: Text(resultResponse?.data.driveName ?? ""),
         backgroundColor: AppColors.blackRock,
+        actions: [
+          Center(child: Text(pageStatus)),
+          IconButton(
+              alignment: Alignment.center,
+              splashRadius: 20,
+              onPressed: () {
+                fetchResultForPrevPage();
+              },
+              icon: const Icon(
+                Icons.arrow_left,
+                color: AppColors.babyBlue,
+              )),
+          IconButton(
+              onPressed: () {
+                fetchResultForNextPage();
+              },
+              splashRadius: 20,
+              icon: const Icon(
+                Icons.arrow_right,
+                color: AppColors.babyBlue,
+              ))
+        ],
       ),
       body: SafeArea(
         child: resultResponse != null
