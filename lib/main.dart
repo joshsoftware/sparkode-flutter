@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sparkode/utility/constants/app_theme.dart';
 import 'package:sparkode/utility/navigator/navigator.dart';
-import 'package:sparkode/view_models/dash_view_model.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
