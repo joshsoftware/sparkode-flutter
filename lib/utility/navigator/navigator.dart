@@ -5,6 +5,7 @@ import 'package:sparkode/modules/home/home.dart';
 import 'package:sparkode/modules/login/forgot_password.dart';
 import 'package:sparkode/modules/login/login_view.dart';
 import 'package:sparkode/views/pages/coming_soon.dart';
+import 'package:sparkode/modules/Result%20list/result_list.dart';
 
 import '../../views/pages/dashboard_page.dart';
 import 'navigation_pages.dart';
@@ -128,6 +129,12 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
 
       case NavigationPages.forgotPassword:
         child = ForgotPassword();
+        break;
+
+      case NavigationPages.resultList:
+        child = ResultList(
+          id: routeSettings.arguments as int,
+        );
         break;
 
       default:

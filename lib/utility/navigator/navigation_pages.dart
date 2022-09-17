@@ -4,4 +4,5 @@ class NavigationPages {
   static const String kAppDrawer = '/AppDrawer';
   static const String home = '/Home';
   static const String forgotPassword = '/ForgotPassword';
+  static const String resultList = '/ResultList';
 }
