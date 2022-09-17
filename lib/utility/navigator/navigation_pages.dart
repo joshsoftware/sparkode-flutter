@@ -5,4 +5,5 @@ class NavigationPages {
   static const String home = '/Home';
   static const String resultList = '/ResultList';
   static const String resultReport = '/ResultReport';
+  static const String forgotPassword = '/ForgotPassword';
 }

@@ -1,4 +1,5 @@
 import 'package:sparkode/base/services/base_service.dart';
+import 'package:sparkode/models/login_model/forgot_password_request_model.dart';
 import 'package:sparkode/models/login_model/login_request_model.dart';
 import 'package:sparkode/utility/helpers/APIHelper/api_response_model.dart';
 
@@ -20,4 +21,23 @@ class LoginServices {
           data: response.data);
     }
   }
+
+  Future<ResponseModel> forgotPassword(String email) async{
+    final ServiceResponseModel response = await BaseServiceManager
+        .sharedInstance
+        .sendRequest(ForgotPasswordRequestModel(email: email));
+    if (response.isSuccess) {
+      try {
+        return ResponseModel(data: response.data);
+      } catch (e) {
+        return ResponseModel(errorMessage: "Parsing Error", isSuccess: false);
+      }
+    } else {
+      return ResponseModel(
+          errorMessage: "error: ${response.errorMessage}",
+          isSuccess: false,
+          data: response.data);
+    }
+  }
+
 }

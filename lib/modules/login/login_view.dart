@@ -138,7 +138,7 @@ class _LoginViewState extends State<LoginView> {
                           TextButton(
                               onPressed: () {
                                 AppNavigator.instance.navigateTo(
-                                    name: NavigationPages.resultList);
+                                    name: NavigationPages.forgotPassword);
                               },
                               child: Text(
                                 "Forgot password",
