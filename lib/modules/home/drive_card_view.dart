@@ -3,6 +3,9 @@ import 'package:sparkode/models/drive_model/drive_response_model.dart';
 import 'package:sparkode/utility/constants/colors.dart';
 import 'package:sparkode/utility/constants/strings.dart';
 import 'package:sparkode/utility/helpers/date_time_helper/date_time_formatter.dart';
+import 'package:sparkode/utility/navigator/navigator.dart';
+
+import '../../utility/navigator/navigation_pages.dart';
 
 class DriveCardView extends StatelessWidget {
   const DriveCardView(this.driveResponseModel);
@@ -113,7 +116,10 @@ class DriveCardView extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      AppNavigator.instance.navigateTo(name: NavigationPages.candidateList,arguments: driveResponseModel.id);
+
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.cornFlowerBlue),
                     child: const Center(child: Text(Strings.candidates))),
@@ -123,7 +129,9 @@ class DriveCardView extends StatelessWidget {
               ),
               Expanded(
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {AppNavigator.instance.navigateTo(
+                        name: NavigationPages.resultList,
+                        arguments: driveResponseModel.id);},
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.cornFlowerBlue),
                     child: const Center(child: Text(Strings.result))),
