@@ -14,11 +14,11 @@ String resultListResponseModelToJson(ResultListResponseModel data) =>
 class ResultListResponseModel {
   ResultListResponseModel({
     required this.data,
-    required this.message,
+    this.message,
   });
 
   Data data;
-  String message;
+  String? message;
 
   factory ResultListResponseModel.fromJson(Map<String, dynamic> json) =>
       ResultListResponseModel(
@@ -38,14 +38,14 @@ class Data {
     required this.page,
     required this.pages,
     required this.driveName,
-    required this.totalSelectedCandidates,
+    this.totalSelectedCandidates,
   });
 
   List<Result> result;
   int page;
   int pages;
   String driveName;
-  int totalSelectedCandidates;
+  int? totalSelectedCandidates;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         result:
@@ -68,25 +68,23 @@ class Data {
 class Result {
   Result({
     required this.candidateId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.score,
-    required this.endTimes,
-    required this.timeTaken,
-    required this.token,
-    required this.isSelected,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.score,
+    // this.endTimes,
+    // this.timeTaken,
+    this.token,
+    this.isSelected = false,
   });
 
   int candidateId;
-  String firstName;
-  String lastName;
-  String email;
-  int score;
-  DateTime endTimes;
-  dynamic timeTaken;
-  String token;
-  bool isSelected;
+  String? firstName;
+  String? lastName;
+  String? email;
+  int? score;
+  String? token;
+  bool? isSelected;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         candidateId: json["candidate_id"],
@@ -94,8 +92,8 @@ class Result {
         lastName: json["last_name"],
         email: json["email"],
         score: json["score"],
-        endTimes: DateTime.parse(json["end_times"]),
-        timeTaken: json["time_taken"],
+        // endTimes: DateTime.parse(json["end_times"]),
+        // timeTaken: json["time_taken"],
         token: json["token"],
         isSelected: json["is_selected"],
       );
@@ -106,8 +104,8 @@ class Result {
         "last_name": lastName,
         "email": email,
         "score": score,
-        "end_times": endTimes.toIso8601String(),
-        "time_taken": timeTaken,
+        // "end_times": endTimes?.toIso8601String(),
+        // "time_taken": timeTaken,
         "token": token,
         "is_selected": isSelected,
       };

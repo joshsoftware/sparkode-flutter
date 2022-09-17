@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sparkode/modules/home/drive_card_view.dart';
 import 'package:sparkode/utility/constants/strings.dart';
+import 'package:sparkode/utility/navigator/navigation_pages.dart';
+import 'package:sparkode/utility/navigator/navigator.dart';
 import '../../models/drive_model/drive_response_model.dart';
 import '../../services/home_services.dart';
 import '../../utility/constants/colors.dart';
@@ -112,8 +115,7 @@ class _HomeState extends State<Home> {
                             onPressed: () {}, icon: Icon(Icons.exit_to_app))
                       ],
                     ),
-                    body: // LoaderWidget.hideLoader(context);
-                        TabBarView(
+                    body: TabBarView(
                       children: tabs.map((Tab tab) {
                         return AnimatedBuilder(
                           animation: list,
@@ -123,7 +125,16 @@ class _HomeState extends State<Home> {
                                     horizontal: 20, vertical: 10),
                                 itemCount: list.value.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return DriveCardView(list.value[index]);
+                                  return GestureDetector(
+                                    onTap: () {
+                                      AppNavigator.instance.navigateTo(
+                                          name: NavigationPages.resultList,
+                                          arguments: list.value[index].id);
+                                    },
+                                    child: DriveCardView(
+                                      list.value[index],
+                                    ),
+                                  );
                                 });
                           },
                         );

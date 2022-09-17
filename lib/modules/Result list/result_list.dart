@@ -42,14 +42,17 @@ class _ResultListState extends State<ResultList> {
         backgroundColor: AppColors.easyBay,
       ),
       body: SafeArea(
-        child: resultResponse != Null
+        child: resultResponse != null
             ? ListView.builder(
                 itemBuilder: (context, index) {
                   return _getTileForList(context, index);
                 },
                 itemCount: resultResponse?.data.result.length,
               )
-            : const Center(child: CircularProgressIndicator()),
+            : const Center(
+                child: CircularProgressIndicator(
+                color: AppColors.babyBlue,
+              )),
       ),
     );
   }
@@ -59,9 +62,9 @@ class _ResultListState extends State<ResultList> {
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black54),
+          border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.ebonyClay),
+          color: AppColors.gray24),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -108,6 +111,10 @@ class _ResultListState extends State<ResultList> {
               Text(
                 resultResponse?.data.result[index].email ?? "",
                 textAlign: TextAlign.start,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    ?.copyWith(color: Colors.white60),
               ),
               const SizedBox(
                 height: 5,
@@ -116,12 +123,20 @@ class _ResultListState extends State<ResultList> {
           ),
           Column(
             children: [
-              const Text("Score"),
+              Text(
+                (resultResponse?.data.result[index].score ?? 0).toString(),
+                style: Theme.of(context).textTheme.headline3?.copyWith(
+                    fontWeight: FontWeight.w800, color: AppColors.babyBlue),
+              ),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
               Text(
-                resultResponse?.data.result[index].score.toString() ?? "",
+                "Score",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline1
+                    ?.copyWith(color: Colors.white70),
               ),
             ],
           ),
