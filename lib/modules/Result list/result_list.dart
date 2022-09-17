@@ -18,6 +18,8 @@ class ResultList extends StatefulWidget {
 class _ResultListState extends State<ResultList> {
   final resultListService = ResultListService();
   ResultListResponseModel? resultResponse;
+  int currentPage = 0;
+  int totalPage = 1;
   @override
   void initState() {
     super.initState();
@@ -38,10 +40,10 @@ class _ResultListState extends State<ResultList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.comet,
+      backgroundColor: AppColors.easyBay,
       appBar: AppBar(
         title: Text(resultResponse?.data.driveName ?? ""),
-        backgroundColor: AppColors.easyBay,
+        backgroundColor: AppColors.blackRock,
       ),
       body: SafeArea(
         child: resultResponse != null
@@ -70,7 +72,7 @@ class _ResultListState extends State<ResultList> {
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(10),
-            color: AppColors.gray24),
+            color: AppColors.steelGray),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

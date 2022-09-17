@@ -96,7 +96,7 @@ class _HomeState extends State<Home> {
                   }
                 });
                 return Scaffold(
-                    backgroundColor: AppColors.blackRock,
+                    backgroundColor: AppColors.easyBay,
                     appBar: AppBar(
                       title: Text(
                         "Drives",
@@ -122,7 +122,7 @@ class _HomeState extends State<Home> {
                           builder: (BuildContext context, Widget? child) {
                             return ListView.builder(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
+                                    horizontal: 14, vertical: 10),
                                 itemCount: list.value.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return GestureDetector(

@@ -11,11 +11,12 @@ class DriveCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 3),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
-          border: Border.all(color: AppColors.crow),
-          borderRadius: BorderRadius.circular(5)),
+          border: Border.all(color: Colors.grey.shade700),
+          borderRadius: BorderRadius.circular(12),
+          color: AppColors.steelGray),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -26,45 +27,18 @@ class DriveCardView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: 40,
-                    child: Column(
-                      children: [
-                        Text("${driveResponseModel.invitationSent}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(
-                                    color: AppColors.white, fontSize: 18)),
-                        Text(Strings.invitation,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(
-                                    color: AppColors.white, fontSize: 18))
-                      ],
-                    ),
+                  CardForCount(
+                    title: Strings.appeared,
+                    count: "${driveResponseModel.appeared}",
                   ),
-                  SizedBox(
-                    width: 40,
-                    child: Column(
-                      children: [
-                        Text(
-                          "${driveResponseModel.totalSubmissions}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              ?.copyWith(color: AppColors.white, fontSize: 18),
-                        ),
-                        Text(Strings.submission,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                ?.copyWith(
-                                    color: AppColors.white, fontSize: 18))
-                      ],
-                    ),
-                  )
+                  CardForCount(
+                    title: Strings.invitation,
+                    count: "${driveResponseModel.invitationSent}",
+                  ),
+                  CardForCount(
+                    title: Strings.submission,
+                    count: "${driveResponseModel.totalSubmissions}",
+                  ),
                 ],
               ),
               Row(
@@ -86,54 +60,74 @@ class DriveCardView extends StatelessWidget {
           ),
           Text(
             "${driveResponseModel.name}",
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(color: AppColors.blueHaze, fontSize: 22),
+            style: Theme.of(context).textTheme.headline6?.copyWith(
+                color: AppColors.babyBlue,
+                fontSize: 18,
+                fontWeight: FontWeight.w800),
           ),
           const SizedBox(
             height: 10,
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                  DateTimeFormatter.getDisplayDate(
-                      driveResponseModel.startTime ?? ""),
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      ?.copyWith(color: AppColors.white, fontSize: 12)),
-              Text(
-                  DateTimeFormatter.getDisplayDate(
-                      driveResponseModel.endTime ?? ""),
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      ?.copyWith(color: AppColors.white, fontSize: 12))
+              Row(
+                children: [
+                  const Icon(
+                    Icons.calendar_month_outlined,
+                    color: AppColors.sunglow,
+                  ),
+                  SizedBox(
+                    width: 6,
+                  ),
+                  Text(
+                      DateTimeFormatter.getDisplayDate(
+                          driveResponseModel.startTime ?? ""),
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                          color: AppColors.blueHaze,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600)),
+                ],
+              ),
+              const Icon(
+                Icons.arrow_right_alt_sharp,
+                color: AppColors.babyBlue,
+              ),
+              Row(
+                children: [
+                  Text(
+                      DateTimeFormatter.getDisplayDate(
+                          driveResponseModel.endTime ?? ""),
+                      style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          color: AppColors.blueHaze,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600)),
+                ],
+              )
             ],
+          ),
+          const SizedBox(
+            height: 8,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.cornFlowerBlue),
-                    child: const Center(child: Text(Strings.candidates))),
+                child: CardButtonForDrive(
+                  onTap: () {},
+                  title: Strings.candidates,
+                ),
               ),
               const SizedBox(
                 width: 4,
               ),
               Expanded(
-                child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.cornFlowerBlue),
-                    child: const Center(child: Text(Strings.result))),
+                child: CardButtonForDrive(
+                  onTap: () {},
+                  title: Strings.result,
+                ),
               )
             ],
           )
@@ -151,27 +145,54 @@ class CardForCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 50,
+      width: 60,
       child: Container(
+        margin: EdgeInsets.all(2.0),
         padding: EdgeInsets.all(4.0),
         decoration: BoxDecoration(
-            border: Border.all(color: AppColors.cornFlowerBlue),
+            border: Border.all(color: AppColors.cornFlowerBlue, width: 2),
             borderRadius: BorderRadius.circular(12)),
         child: Column(
           children: [
             Text(
               count,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  ?.copyWith(color: AppColors.white, fontSize: 18),
+              style: Theme.of(context).textTheme.headline6?.copyWith(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700),
+            ),
+            SizedBox(
+              height: 3,
             ),
             Text(title,
                 style: Theme.of(context)
                     .textTheme
                     .headline6
-                    ?.copyWith(color: AppColors.white, fontSize: 18))
+                    ?.copyWith(color: AppColors.blueHaze, fontSize: 14))
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CardButtonForDrive extends StatelessWidget {
+  final String title;
+  final Function() onTap;
+
+  const CardButtonForDrive(
+      {super.key, required this.title, required this.onTap});
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onTap,
+      style:
+          ElevatedButton.styleFrom(backgroundColor: AppColors.cornFlowerBlue),
+      child: Center(
+        child: Text(
+          title,
+          style: Theme.of(context).textTheme.headline1?.copyWith(
+              color: Colors.grey.shade200, fontWeight: FontWeight.w600),
         ),
       ),
     );
