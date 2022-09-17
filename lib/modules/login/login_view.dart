@@ -136,7 +136,9 @@ class _LoginViewState extends State<LoginView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                AppNavigator.instance.navigateTo(name: NavigationPages.forgotPassword);
+                              },
                               child: Text(
                                 "Forgot password",
                                 style: Theme.of(context)
