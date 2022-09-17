@@ -1,35 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sparkode/models/drive_model/drive_response_model.dart';
-import 'package:sparkode/services/home_services.dart';
 import 'package:sparkode/utility/constants/colors.dart';
 import 'package:sparkode/utility/constants/strings.dart';
 
-class DriveCardView extends StatefulWidget {
-  const DriveCardView({Key? key, required this.drive}) : super(key: key);
-
-  final Drive drive;
-  @override
-  State<DriveCardView> createState() => _DriveCardViewState(drive);
-}
-
-class _DriveCardViewState extends State<DriveCardView> {
-  _DriveCardViewState(this.driveResponseModel);
-
+class DriveCardView extends StatelessWidget {
+  const DriveCardView(this.driveResponseModel);
   final Drive driveResponseModel;
-
-  @override
-  void initState() {
-    super.initState();
-    HomeServices().getDrives("ongoing_drives");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 3),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-          border: Border.all(color: AppColors.babyBlue),
+          border: Border.all(color: AppColors.crow),
           borderRadius: BorderRadius.circular(5)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -45,8 +28,14 @@ class _DriveCardViewState extends State<DriveCardView> {
                     width: 40,
                     child: Column(
                       children: [
-                        Text("${driveResponseModel.appeared}"),
-                        const Text(Strings.appeared)
+                        Text("${driveResponseModel.appeared}",style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: AppColors.white, fontSize: 18),),
+                        Text(Strings.appeared,style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: AppColors.white, fontSize: 18))
                       ],
                     ),
                   ),
@@ -54,8 +43,14 @@ class _DriveCardViewState extends State<DriveCardView> {
                     width: 40,
                     child: Column(
                       children: [
-                        Text("${driveResponseModel.invitationSent}"),
-                        const Text(Strings.invitation)
+                        Text("${driveResponseModel.invitationSent}",style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: AppColors.white, fontSize: 18)),
+                        Text(Strings.invitation,style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: AppColors.white, fontSize: 18))
                       ],
                     ),
                   ),
@@ -63,8 +58,11 @@ class _DriveCardViewState extends State<DriveCardView> {
                     width: 40,
                     child: Column(
                       children: [
-                        Text("${driveResponseModel.totalSubmissions}"),
-                        const Text(Strings.submission)
+                        Text("${driveResponseModel.totalSubmissions}",style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: AppColors.white, fontSize: 18),),
+                        Text(Strings.submission,style: Theme.of(context).textTheme.headline6?.copyWith(color: AppColors.white, fontSize: 18))
                       ],
                     ),
                   )
@@ -73,8 +71,8 @@ class _DriveCardViewState extends State<DriveCardView> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
+                  // IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.delete,color: AppColors.babyBlue,))
                 ],
               )
             ],
@@ -84,7 +82,10 @@ class _DriveCardViewState extends State<DriveCardView> {
           ),
           Text(
             "${driveResponseModel.name}",
-            style: const TextStyle(fontSize: 18),
+            style: Theme.of(context)
+              .textTheme
+              .headline6
+              ?.copyWith(color: AppColors.blueHaze, fontSize: 22),
           ),
           const SizedBox(
             height: 10,
@@ -93,8 +94,14 @@ class _DriveCardViewState extends State<DriveCardView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${driveResponseModel.startTime}"),
-              Text("${driveResponseModel.endTime}")
+              Text("${driveResponseModel.startTime}",style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  ?.copyWith(color: AppColors.white, fontSize: 12)),
+              Text("${driveResponseModel.endTime}",style: Theme.of(context)
+                  .textTheme
+                  .subtitle1
+                  ?.copyWith(color: AppColors.white, fontSize: 12))
             ],
           ),
           Row(
@@ -104,14 +111,18 @@ class _DriveCardViewState extends State<DriveCardView> {
               Expanded(
                 child: ElevatedButton(
                     onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.cornFlowerBlue),
                     child: const Center(child: Text(Strings.candidates))),
               ),
               const SizedBox(
-                width: 10,
+                width: 4,
               ),
               Expanded(
                 child: ElevatedButton(
                     onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.cornFlowerBlue),
                     child: const Center(child: Text(Strings.result))),
               )
             ],
@@ -121,3 +132,4 @@ class _DriveCardViewState extends State<DriveCardView> {
     );
   }
 }
+
