@@ -60,8 +60,8 @@ class Drive {
   int id;
   String? name;
   String? description;
-  DateTime? startTime;
-  DateTime? endTime;
+  String? startTime;
+  String? endTime;
   int? invitationSent;
   int? appeared;
   int? totalSubmissions;
@@ -71,8 +71,8 @@ class Drive {
     id: json["id"],
     name: json["name"],
     description: json["description"],
-    startTime: DateTime.parse(json["start_time"]),
-    endTime: DateTime.parse(json["end_time"]),
+    startTime: json["start_time"],
+    endTime: json["end_time"],
     invitationSent: json["invitation_sent"],
     appeared: json["appeared"],
     totalSubmissions: json["total_submissions"],
@@ -83,8 +83,8 @@ class Drive {
     "id": id,
     "name": name,
     "description": description,
-    "start_time": startTime?.toIso8601String(),
-    "end_time": endTime?.toIso8601String(),
+    "start_time": startTime,
+    "end_time": endTime,
     "invitation_sent": invitationSent,
     "appeared": appeared,
     "total_submissions": totalSubmissions,
