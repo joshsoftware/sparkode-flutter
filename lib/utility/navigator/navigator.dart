@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:sparkode/modules/WebView/ResultWebView.dart';
 import 'package:sparkode/modules/candidates/CandidateList.dart';
 import 'package:sparkode/modules/home/home.dart';
 import 'package:sparkode/modules/login/forgot_password.dart';
@@ -142,6 +143,14 @@ class AppNavigator extends RouterDelegate<List<RouteSettings>>
         child = ResultList(
           id: routeSettings.arguments as int,
         );
+        break;
+
+      case NavigationPages.resultReport:
+        child = ResultWebView();
+        break;
+
+      case NavigationPages.forgotPassword:
+        child = ForgotPassword();
         break;
 
       default:
