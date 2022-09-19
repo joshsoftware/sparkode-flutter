@@ -24,7 +24,6 @@ class _LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
-    Preference.load();
   }
 
   @override

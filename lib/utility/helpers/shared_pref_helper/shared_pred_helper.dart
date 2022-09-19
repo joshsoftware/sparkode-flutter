@@ -64,8 +64,8 @@ class Preference {
     _prefs.setString(key,json);
   }
 
-  static Map<String,String>? getHeaders(String key){
-    Map<String,String> json;
+  static Map<String,dynamic>? getHeaders(String key){
+    Map<String,dynamic> json;
     if(_prefs.getString(key)!=null){
       json = jsonDecode(_prefs.getString(key)!);
     }

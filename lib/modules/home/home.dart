@@ -6,6 +6,7 @@ import 'package:sparkode/utility/navigator/navigation_pages.dart';
 import 'package:sparkode/utility/navigator/navigator.dart';
 import '../../models/drive_model/drive_response_model.dart';
 import '../../services/home_services.dart';
+import '../../utility/common_widgets/alert_bar.dart';
 import '../../utility/constants/colors.dart';
 import '../../utility/helpers/APIHelper/api_response_model.dart';
 
@@ -45,21 +46,27 @@ class _HomeState extends State<Home> {
         builder: (BuildContext context, AsyncSnapshot asyncSnapshot) {
           if (asyncSnapshot.connectionState == ConnectionState.done &&
               asyncSnapshot.hasData) {
-            ongoingDrive = DriveResponseModel.fromJson(
-                    (asyncSnapshot.data[0] as ResponseModel).data
-                        as Map<String, dynamic>)
-                .data
-                .drives;
-            upcomingDrive = DriveResponseModel.fromJson(
-                    (asyncSnapshot.data[1] as ResponseModel).data
-                        as Map<String, dynamic>)
-                .data
-                .drives;
-            completedDrive = DriveResponseModel.fromJson(
-                    (asyncSnapshot.data[2] as ResponseModel).data
-                        as Map<String, dynamic>)
-                .data
-                .drives;
+            if((asyncSnapshot.data[0] as ResponseModel).isSuccess == true){
+              ongoingDrive = DriveResponseModel.fromJson((asyncSnapshot.data[0] as ResponseModel).data as Map<String, dynamic>).data.drives;
+              upcomingDrive = DriveResponseModel.fromJson((asyncSnapshot.data[1] as ResponseModel).data as Map<String, dynamic>).data.drives;
+              completedDrive = DriveResponseModel.fromJson((asyncSnapshot.data[2] as ResponseModel).data as Map<String, dynamic>).data.drives;
+            }
+            else{
+              ongoingDrive = [];
+              upcomingDrive = [];
+              completedDrive = [];
+              final errorMap =
+              (asyncSnapshot.data[0] as ResponseModel).data as Map<String, dynamic>;
+
+              final errorMessage =
+              (errorMap["errors"] as List<dynamic>)
+                  .join(', ');
+              return const Scaffold(backgroundColor: AppColors.blackRock,body: Center(child: Text("Something went Wrong"),));
+              // AlertBar.show(context,
+              //     title: "Something went wrong!",
+              //     description: errorMessage);
+
+            }
             if (isLoading) {
               list = ValueNotifier(ongoingDrive);
               isLoading = false;
