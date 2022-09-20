@@ -29,10 +29,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Future init() async{
     await Preference.load();
     if(Preference.getHeaders("headers")!=null){
-      AppNavigator.instance.navigateTo(name: NavigationPages.home);
+      AppNavigator.instance.navigateTo(name: NavigationPages.home,mode : AppNavigationMode.pushAndRemoveRest);
     }
     else{
-      AppNavigator.instance.navigateTo(name: NavigationPages.kLogin);
+      AppNavigator.instance.navigateTo(name: NavigationPages.kLogin,mode : AppNavigationMode.pushAndRemoveRest);
     }
 
   }

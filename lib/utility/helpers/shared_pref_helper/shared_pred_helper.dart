@@ -59,21 +59,23 @@ class Preference {
     return user;
   }
 
-  static void setHeaders(String key,Map<String,String> value){
+  static void setHeaders(String key,Map<String,String>? value){
     String json = jsonEncode(value);
     _prefs.setString(key,json);
   }
 
-  static Map<String,dynamic>? getHeaders(String key){
+  static Map<String,String>? getHeaders(String key){
     Map<String,dynamic> json;
-    if(_prefs.getString(key)!=null){
+    if(_prefs.getString(key)!=null && _prefs.getString(key)?.toLowerCase() != "null"){
       json = jsonDecode(_prefs.getString(key)!);
     }
     else{
       return null;
     }
+    Map<String, String> stringQueryParameters =
+    json.map((key, value) => MapEntry(key, value?.toString()??""));
 
-    return json;
+    return stringQueryParameters;
   }
 
 

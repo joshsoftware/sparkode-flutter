@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sparkode/modules/home/drive_card_view.dart';
 import 'package:sparkode/utility/constants/strings.dart';
+import 'package:sparkode/utility/helpers/shared_pref_helper/shared_pred_helper.dart';
 import 'package:sparkode/utility/navigator/navigation_pages.dart';
 import 'package:sparkode/utility/navigator/navigator.dart';
 import '../../models/drive_model/drive_response_model.dart';
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
   bool isLoading = true;
 
   late Future<List<ResponseModel>> results = Future.wait([
-    homeServices.getDrives("ongoing_drives"),
+      homeServices.getDrives("ongoing_drives"),
     homeServices.getDrives("upcoming_drives"),
     homeServices.getDrives("completed_drives"),
   ]);
@@ -110,7 +111,10 @@ class _HomeState extends State<Home> {
                       ),
                       actions: [
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.exit_to_app))
+                            onPressed: () {
+                              Preference.setHeaders("headers", null);
+                              AppNavigator.instance.popRoute();
+                            }, icon: Icon(Icons.exit_to_app))
                       ],
                     ),
                     body: TabBarView(

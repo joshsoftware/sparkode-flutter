@@ -32,6 +32,7 @@ class _LoginViewState extends State<LoginView> {
       backgroundColor: AppColors.blackRock,
       appBar: AppBar(
         backgroundColor: const Color(0),
+        automaticallyImplyLeading: false,
         elevation: 0,
       ),
       body: LayoutBuilder(

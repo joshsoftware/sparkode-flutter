@@ -35,7 +35,7 @@ class BaseServiceManager {
     var allHeaders = requestModel.header;
     var headers = Preference.getHeaders("headers");
     if (headers!=null) {
-      allHeaders.addAll(header);
+      allHeaders.addAll(headers);
     }
     try {
       switch (requestModel.requestType) {
@@ -51,6 +51,7 @@ class BaseServiceManager {
                 ),
               )
               .timeout(Duration(seconds: _defaultTimeOut));
+          debugPrint("<<<${httpResponse.requestOptions.headers}");
           break;
 
         case RequestType.put:
